@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="../script/login.js"></script>
+</head>
+
+</html>
+
+<body>
+    <main>
+        <section class="login-box">
+            <header>
+                <h2>Sistema de chat do if</h2>
+                <small>Login</small>
+            </header>
+
+            <form onsubmit="event.preventDefault(); login();">
+                <input type="text" id="user" placeholder="Usuário">
+                <input type="password" id="pass" placeholder="Senha">
+                <button type="submit">Entrar</button>
+                <p id="msg"></p>
+            </form>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+
+            <!-- Logo + Info -->
+            <div class="footer-section">
+                <img src="../imagens/logo.png" class="logo-ifrn" alt="IFRN">
+
+            </div>
+            <div class="footer-section">
+                <ul>
+                    <li>Trabalho de Programação para Internet</li>
+                    <li>Prof. Marcelo Figueiredo Barbosa Júnior</li>
+                </ul>
+            </div>
+
+            <!-- Referências -->
+            <div class="footer-section">
+                <h3>Referências</h3>
+                <nav>
+                    <a href="https://portal.ifrn.edu.br/" target="_blank">
+                        Portal IFRN
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Devs -->
+            <div class="footer-section">
+                <h3>Devs</h3>
+                <ul>
+                    <li>
+                        Vinicius Basilio<br>
+                        <a href="mailto:vinicius.basilio@escolar.ifrn.edu.br">vinicius.basilio@escolar.ifrn.edu.br</a>
+                    </li>
+
+                    <li>
+                        Alysson Felipe<br>
+                        <a href="mailto:f.alysson@escolar.ifrn.edu.br">f.alysson@escolar.ifrn.edu.br</a>
+                    </li>
+
+                    <li>
+                        José Halisson<br>
+                        <a href="mailto:halisson.j@escolar.ifrn.edu.br">halisson.j@escolar.ifrn.edu.br</a>
+                    </li>
+
+                    <li>
+                        Eduardo Alexandre<br>
+                        <a href="mailto:alexandre.eduardo@escolar.ifrn.edu.br">alexandre.eduardo@escolar.ifrn.edu.br</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </footer>
+</body>
+
+</html>
