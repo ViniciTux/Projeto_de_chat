@@ -1,67 +1,112 @@
-let currentRoom = "geral";
+let user = localStorage.getItem("user") || "Anônimo";
+let current = "";
 
-// bloqueio de acesso (login obrigatório)
-let user = localStorage.getItem("user");
+const bloqueados = ["msi", "mecanica", "refrigeracao"];
 
-if (!user) {
-    alert("Você não está logado. Voltando para o login...");
-    window.location.href = "../html/login.html";
+function abrirChat(room) {
+
+    if (bloqueados.includes(room)) {
+        alert("Você não tem acesso a esse chat");
+        return;
+    }
+
+    current = room;
+
+    document.getElementById("chatTitle").innerText = "Chat: " + room;
+
+    carregarMensagens(room);
 }
 
-// chats fictícios iniciais
-if (!localStorage.getItem("chat_geral")) {
-    localStorage.setItem("chat_geral", JSON.stringify([
-        {user:"admin", msg:"Bem-vindo ao chat geral"},
-        {user:"maria", msg:"Oi pessoal"}
-    ]));
+function send() {
+    const input = document.getElementById("msg");
+    const texto = input.value;
+
+    if (!texto || !current) return;
+
+    const box = document.getElementById("chatBox");
+
+    const id = Date.now();
+
+    const msg = document.createElement("div");
+    msg.className = "msg";
+
+    msg.innerHTML = `
+        <strong>${user}</strong><br>
+        ${texto}
+    `;
+
+    box.appendChild(msg);
+
+    setTimeout(() => {
+        msg.remove();
+        removerMensagem(current, id);
+    }, 10000);
+
+    salvarMensagem(current, texto, id);
+
+    input.value = "";
+    box.scrollTop = box.scrollHeight;
 }
 
-if (!localStorage.getItem("chat_suporte")) {
-    localStorage.setItem("chat_suporte", JSON.stringify([
-        {user:"admin", msg:"Suporte ativo"},
-        {user:"joao", msg:"Preciso de ajuda"}
-    ]));
+function salvarMensagem(room, texto, id) {
+
+    let dados = JSON.parse(sessionStorage.getItem(room)) || [];
+
+    dados.push({
+        id: id,
+        user: user,
+        msg: texto
+    });
+
+    sessionStorage.setItem(room, JSON.stringify(dados));
 }
 
-function loadChat() {
-    let data = JSON.parse(localStorage.getItem("chat_" + currentRoom)) || [];
+function carregarMensagens(room) {
 
-    let box = document.getElementById("chatBox");
+    const box = document.getElementById("chatBox");
     box.innerHTML = "";
 
-    data.forEach(m => {
-        let p = document.createElement("p");
-        p.className = "message";
-        p.innerText = `${m.user}: ${m.msg}`;
-        box.appendChild(p);
+    let dados = JSON.parse(sessionStorage.getItem(room)) || [];
+
+    dados.forEach(m => {
+
+        const div = document.createElement("div");
+        div.className = "msg";
+
+        div.innerHTML = `
+            <strong>${m.user}</strong><br>
+            ${m.msg}
+
+
+        `;
+
+        box.appendChild(div);
     });
+
+    box.scrollTop = box.scrollHeight;
 }
 
-function sendMsg() {
-    let msg = document.getElementById("msg").value;
-    if (!msg) return;
+function removerMensagem(room, id) {
 
-    let key = "chat_" + currentRoom;
-    let data = JSON.parse(localStorage.getItem(key)) || [];
+    let dados = JSON.parse(sessionStorage.getItem(room)) || [];
 
-    data.push({user: user, msg: msg});
+    dados = dados.filter(m => m.id !== id);
 
-    localStorage.setItem(key, JSON.stringify(data));
-
-    document.getElementById("msg").value = "";
-    loadChat();
+    sessionStorage.setItem(room, JSON.stringify(dados));
 }
 
-function changeRoom(room) {
-    currentRoom = room;
-    document.getElementById("roomTitle").innerText = "Sala: " + room;
-    loadChat();
+function irParaDevs() {
+    window.location.href = "../html/dev.html";
 }
 
-function logout() {
+function sair() {
+
     localStorage.removeItem("user");
+
     window.location.href = "../html/login.html";
 }
 
-// inicializa chat
-loadChat();
+function enviarMensagem(event) {
+    event.preventDefault(); 
+    send();
+}

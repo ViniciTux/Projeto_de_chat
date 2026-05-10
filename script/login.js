@@ -1,22 +1,33 @@
-const users = [
-    {u:"mimmarcelo", p:"Teste123"},
-    {u:"admin", p:"1234"},
-    {u:"joao", p:"123"},
-    {u:"maria", p:"123"},
-    {u:"aluno", p:"123"}
-];
+function login() {
+  const user = document.getElementById("usuario").value;
+  const pass = document.getElementById("senha").value;
 
-function login(){
-    let u = document.getElementById("user").value;
-    let p = document.getElementById("pass").value;
+  const usuarios = [
+    { usuario: "mimmarcelo", senha: "Teste123" },
+    { usuario: "vinicius", senha: "6767" },
+    { usuario: "halisson", senha: "123abc" },
+    { usuario: "ratao", senha: "4141" },
+    { usuario: "eduardo", senha: "1234" }
+  ];
 
-    let found = users.find(x => x.u === u && x.p === p);
+  const valido = usuarios.find(u => u.usuario === user && u.senha === pass);
 
-    if(found){
-        localStorage.setItem("user", u);
-        window.location.href = "chat.html";
-    } else {
-        document.getElementById("msg").innerText =
-        "Acesso negado. Surpreendentemente, o sistema funciona.";
-    }
+  if (valido) {
+
+    localStorage.setItem("user", user);
+
+    window.location.href = "chat.html";
+
+  } else {
+    alert("Usuário ou senha inválidos");
+
+    document.getElementById("usuario").value = "";
+    document.getElementById("senha").value = "";
+  }
+}
+
+
+function fazerLogin(event) {
+  event.preventDefault();
+  login();
 }

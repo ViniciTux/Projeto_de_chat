@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina dos devs</title>
+    <link rel="stylesheet" href="../css/dev.css">
+</head>
+
+<body>
+    <header class="header">
+        <img src="../imagens/iconeDoChatIF.png">
+        <h2>ChatIFRN</h2>
+    </header>
+
+    <div class="container">
+
+        <aside class="menu">
+            <h2>ChatIFRN</h2>
+            
+            <button onclick="sair()">Sair</button>
+        </aside>
+
+        <script>
+            function sair() {
+                localStorage.removeItem("user");
+
+                if (document.referrer) {
+                    window.history.back();
+                } else {
+                    window.location.href = "login.html";
+                }
+            }
+        </script>
+
+        <main class="devs-area">
+
+            <h2>Desenvolvedores</h2>
+
+            <div class="devs-grid">
+
+                <div class="dev">
+                    <div class="avatar"><img src="../imagens/goat.png" alt="Vinicius"></div>
+                    <h3>Vinicius Basilio</h3>
+                    <p>e-mail: vinicius.basilio@escolar.ifrn.edu.br</p>
+                    <p>GitHub: github.com/ViniciTux</p>
+                </div>
+
+                <div class="dev">
+                    <div class="avatar"><img src="../imagens/dudu.png" alt="Eduardo"></div>
+                    <h3>Eduardo Nascimento</h3>
+                    <p>e-mail: alexandre.eduardo@escolar.ifrn.edu.br</p>
+                    <p>GitHub: github.com/edunascc</p>
+                </div>
+
+                <div class="dev">
+                    <div class="avatar"><img src="../imagens/ze.png" alt="Halisson"></div>
+                    <h3>José Halisson</h3>
+                    <p>e-mail: halisson.j@escolar.ifrn.edu.br</p>
+                    <p>GitHub: github.com/halisson-ai</p>
+                </div>
+
+                <div class="dev">
+                    <div class="avatar"><img src="../imagens/ratao.png" alt="Alysson"></div>
+                    <h3>Alysson Felipe</h3>
+                    <p>e-mail: alysson@escolar.ifrn.edu.br</p>
+                    <p>GitHub: github.com/AlyssonFelipe</p>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <footer class="footer">
+
+        <div class="footer-left">
+            <img src="../imagens/ifrn.png">
+        </div>
+
+        <div class="footer-center">
+            <p><strong>Trabalho de Programação para Internet</strong></p>
+            <p>Prof. Marcelo Figueiredo Barbosa Júnior</p>
+        </div>
+
+        <div class="footer-right">
+            <h3>Referencias:</h3>
+            <a href="https://stackoverflow.com/">StackOverflow</a>
+            <a href="https://developer.mozilla.org/pt-BR/docs/Web/API/Window/sessionStorage">Session Storage</a>
+            <a href="https://github.com/">GitHub</a>
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
